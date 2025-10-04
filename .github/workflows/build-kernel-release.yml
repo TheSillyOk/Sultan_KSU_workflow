@@ -87,7 +87,7 @@ jobs:
 
           git clone --depth=1 https://github.com/TheWildJames/AnyKernel3.git -b "$ANYKERNEL_BRANCH" AK3
           echo "ak3_dir=$PWD/AK3" >> $GITHUB_ENV
-          git clone --depth=1 https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH" susfs
+          git clone --depth=5 https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH" susfs
           echo "susfs_dir=$PWD/susfs" >> $GITHUB_ENV
           git clone --depth=1 https://github.com/TheWildJames/kernel_patches.git james_patches
           echo "james_dir=$PWD/james_patches" >> $GITHUB_ENV
@@ -157,21 +157,20 @@ jobs:
       - name: Apply SUSFS Patches
         if: matrix.susfs
         run: |
-          cd "${{ env.kernel_dir }}"
-
-          echo "Applying SUSFS patches..."
+          cd "${{ env.susfs_dir }}"
+          git checkout 20716e09ff1196f0f73e35c51d304933e45609d5
 
           # Copy SUSFS patches
-          cp ${{ env.susfs_dir }}/kernel_patches/50_add_susfs_in_gki-${{ matrix.kernel.android_version }}-${{ matrix.kernel.kernel_version }}.patch ./
-          cp ${{ env.susfs_dir }}/kernel_patches/fs/* ./fs/
-          cp ${{ env.susfs_dir }}/kernel_patches/include/linux/* ./include/linux/
+          cp ${{ env.susfs_dir }}/kernel_patches/50_add_susfs_in_gki-${{ matrix.kernel.android_version }}-${{ matrix.kernel.kernel_version }}.patch ${{ env.kernel_dir }}/
+          cp ${{ env.susfs_dir }}/kernel_patches/fs/* ${{ env.kernel_dir }}/fs/
+          cp ${{ env.susfs_dir }}/kernel_patches/include/linux/* ${{ env.kernel_dir }}/include/linux/
 
           if [[ -n "${{ matrix.build.susfs_patch }}" ]]; then
-            cd "${{ matrix.build.folder }}"
+            cd "${{ env.kernel_dir }}/${{ matrix.build.folder }}"
             patch -p1 --forward < ${{ env.ok_dir }}/${{ matrix.build.susfs_patch }}
-            cd ..
           fi
 
+          cd "${{ env.kernel_dir }}"
           patch -p1 < 50_add_susfs_in_gki-${{ matrix.kernel.android_version }}-${{ matrix.kernel.kernel_version }}.patch || true
           patch -p1 --fuzz=3 < ${{ env.james_dir }}/sultan/sys.c_fix.patch
 
