@@ -157,8 +157,6 @@ jobs:
       - name: Apply SUSFS Patches
         if: matrix.susfs
         run: |
-          cd "${{ env.susfs_dir }}"
-          git checkout 20716e09ff1196f0f73e35c51d304933e45609d5
 
           # Copy SUSFS patches
           cp ${{ env.susfs_dir }}/kernel_patches/50_add_susfs_in_gki-${{ matrix.kernel.android_version }}-${{ matrix.kernel.kernel_version }}.patch ${{ env.kernel_dir }}/
