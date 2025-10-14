@@ -46,7 +46,7 @@ jobs:
             ksu_patches: "KSUN/WildJames-Manager.patch"
             kernel_patches: "../james_patches/sultan/syscall_hooks.patch"
             extra_configs: "CONFIG_KSU_KPROBES_HOOK=n"
-            susfs_patch: "sultan/KSUN/KSUN-SUSFS-1.5.11.patch"
+            susfs_patch: "sultan/KSUN/KSUN-SUSFS-1.5.12.patch"
             ak3_suffix: "_KSUNext"
           - type: RKSU
             ksu: true
@@ -55,7 +55,7 @@ jobs:
             branch: "main"
             kernel_patches: "../james_patches/sultan/syscall_hooks.patch"
             extra_configs: "CONFIG_KSU_MANUAL_HOOK=y"
-            susfs_patch: "sultan/RKSU/RKSU-SUSFS-1.5.11.patch"
+            susfs_patch: "sultan/RKSU/RKSU-SUSFS-1.5.12.patch"
             ak3_suffix: "_RKSU"
 
         susfs: [false, true]
@@ -310,7 +310,7 @@ jobs:
           [+] KSU [${{ env.KSU_V }}](${{ env.KSU_URL }})
           [+] KSUN [${{ env.KSUN_V }}](${{ env.KSUN_URL }}) + WKSU Manager
           [+] RKSU [${{ env.RKSU_V }}](${{ env.RKSU_URL }})
-          [+] SUSFS v1.5.11
+          [+] SUSFS v1.5.12
           EOF
 
       - name: Set release tag
