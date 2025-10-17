@@ -50,7 +50,6 @@ jobs:
             extra_configs: "CONFIG_KSU_KPROBES_HOOK=n"
 #            susfs_patch: "sultan/KSUN/KSUN-SUSFS-1.5.12.patch"
             ak3_suffix: "_KSUNext"
-
           - type: RKSU
             ksu: true
             repo: "rsuntk/KernelSU"
@@ -61,6 +60,17 @@ jobs:
             extra_configs: "CONFIG_KSU_MANUAL_HOOK=y"
 #            susfs_patch: "sultan/RKSU/RKSU-SUSFS-1.5.12.patch"
             ak3_suffix: "_RKSU"
+          - type: SukiSU
+            ksu: true
+            repo: "SukiSU-Ultra/SukiSU-Ultra"
+            folder: "KernelSU"
+            branch: "main"
+            susfs_branch: "susfs-main"
+            ksu_patches: "../fix_list_count_nodes_indent.patch"
+            kernel_patches: "../james_patches/sultan/syscall_hooks.patch"
+            extra_configs: "CONFIG_KSU_MANUAL_HOOK=y CONFIG_KSU_MANUAL_SU=n CONFIG_COMPAT=y CONFIG_ZRAM_GS_WRITEBACK=y"
+            ak3_suffix: "_SukiSU"
+            # kpm: "https://raw.githubusercontent.com/ShirkNeko/SukiSU_patch/refs/heads/main/kpm/patch_linux"
 
         susfs: [false, true]
         exclude:
@@ -99,6 +109,7 @@ jobs:
           echo "kernel_dir=$PWD/sultan" >> $GITHUB_ENV
           git clone --depth=1 https://github.com/TheSillyOk/kernel_ls_patches ok_patches
           echo "ok_dir=$PWD/ok_patches" >> $GITHUB_ENV
+          curl "https://gist.githubusercontent.com/MiRinChan/87371b65f283bb031d80e55b16b6d7ad/raw/6b82ef649188c1f0f593b0cd8a5146c5e4fd0114/fix_list_count_nodes_indent.patch" > fix_list_count_nodes_indent.patch
 
           ${{ matrix.susfs || false }} && ksu_repo="${{ matrix.build.susfs_repo || matrix.build.repo }}" || ksu_repo="${{ matrix.build.repo }}" || true
           echo "ksu_repo=$ksu_repo" >> $GITHUB_ENV
