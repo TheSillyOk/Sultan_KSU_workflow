@@ -43,19 +43,23 @@ jobs:
             repo: "KernelSU-Next/KernelSU-Next"
             folder: "KernelSU-Next"
             branch: "next"
+            susfs_repo: "pershoot/KernelSU-Next"
+            susfs_branch: "next-susfs"
             ksu_patches: "KSUN/WildJames-Manager.patch"
             kernel_patches: "../james_patches/sultan/syscall_hooks.patch"
             extra_configs: "CONFIG_KSU_KPROBES_HOOK=n"
-            susfs_patch: "sultan/KSUN/KSUN-SUSFS-1.5.12.patch"
+#            susfs_patch: "sultan/KSUN/KSUN-SUSFS-1.5.12.patch"
             ak3_suffix: "_KSUNext"
+
           - type: RKSU
             ksu: true
             repo: "rsuntk/KernelSU"
             folder: "KernelSU"
             branch: "main"
+            susfs_branch: "susfs-main"
             kernel_patches: "../james_patches/sultan/syscall_hooks.patch"
             extra_configs: "CONFIG_KSU_MANUAL_HOOK=y"
-            susfs_patch: "sultan/RKSU/RKSU-SUSFS-1.5.12.patch"
+#            susfs_patch: "sultan/RKSU/RKSU-SUSFS-1.5.12.patch"
             ak3_suffix: "_RKSU"
 
         susfs: [false, true]
@@ -96,7 +100,9 @@ jobs:
           git clone --depth=1 https://github.com/TheSillyOk/kernel_ls_patches ok_patches
           echo "ok_dir=$PWD/ok_patches" >> $GITHUB_ENV
 
-          ${{ matrix.susfs && matrix.build.susfs_branch || false }} && ksu_branch="${{ matrix.build.susfs_branch }}" || ksu_branch="${{ matrix.build.branch }}" || true
+          ${{ matrix.susfs || false }} && ksu_repo="${{ matrix.build.susfs_repo || matrix.build.repo }}" || ksu_repo="${{ matrix.build.repo }}" || true
+          echo "ksu_repo=$ksu_repo" >> $GITHUB_ENV
+          ${{ matrix.susfs || false }} && ksu_branch="${{ matrix.build.susfs_branch || matrix.build.branch }}" || ksu_branch="${{ matrix.build.branch }}" || true
           echo "ksu_branch=$ksu_branch" >> $GITHUB_ENV
 
           build_type="${{ matrix.build.ak3_suffix }}"
