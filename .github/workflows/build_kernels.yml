@@ -64,7 +64,7 @@ jobs:
             ksu: true
             repo: "SukiSU-Ultra/SukiSU-Ultra"
             folder: "KernelSU"
-            branch: "main"
+            branch: "nongki"
             susfs_branch: "susfs-main"
             ksu_patches: "../fix_list_count_nodes_indent.patch"
             kernel_patches: "../james_patches/sultan/syscall_hooks.patch"
