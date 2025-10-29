@@ -327,6 +327,7 @@ jobs:
           [+] KSU [${{ env.KSU_V }}](${{ env.KSU_URL }})
           [+] KSUN [${{ env.KSUN_V }}](${{ env.KSUN_URL }}) + WKSU Manager
           [+] RKSU [${{ env.RKSU_V }}](${{ env.RKSU_URL }})
+          [+] SukiSU [${{ env.SUKI_V }}](${{ env.SUKI_URL }})
           [+] SUSFS v1.5.12
           EOF
 
