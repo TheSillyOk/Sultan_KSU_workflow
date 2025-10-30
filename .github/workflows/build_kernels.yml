@@ -154,7 +154,7 @@ jobs:
           cd "${{ env.kernel_dir }}"
 
           echo "Adding KernelSU..."
-          curl -LSs "https://raw.githubusercontent.com/${{ matrix.build.repo }}/${{ matrix.build.branch }}/kernel/setup.sh" | bash -s ${{ env.ksu_branch }}
+          curl -LSs "https://raw.githubusercontent.com/${{ env.ksu_repo }}/${{ env.ksu_branch }}/kernel/setup.sh" | bash -s ${{ env.ksu_branch }}
           if [[ -n "${{ matrix.build.checkout }}" ]]; then
             cd "${{ matrix.build.folder }}" && git checkout "${{ matrix.build.checkout }}" && cd -
           fi
