@@ -28,10 +28,10 @@ jobs:
         build:
 #          - type: Normal
 #            ksu: false
+#            exclude: susfs
 #            ak3_suffix: ""
           - type: KSU
             ksu: true
-            susfs: true
             repo: "tiann/KernelSU"
             folder: "KernelSU"
             branch: "main"
@@ -41,7 +41,6 @@ jobs:
             ak3_suffix: "_KSU"
           - type: KSUN
             ksu: true
-            susfs: true
             repo: "KernelSU-Next/KernelSU-Next"
             folder: "KernelSU-Next"
             branch: "next"
@@ -54,7 +53,6 @@ jobs:
             ak3_suffix: "_KSUNext"
           - type: RKSU
             ksu: true
-            susfs: true
             repo: "rsuntk/KernelSU"
             folder: "KernelSU"
             branch: "main"
@@ -65,7 +63,6 @@ jobs:
             ak3_suffix: "_RKSU"
           - type: SukiSU
             ksu: true
-            susfs: true
             repo: "SukiSU-Ultra/SukiSU-Ultra"
             folder: "KernelSU"
             branch: "main"
@@ -78,7 +75,7 @@ jobs:
             # kpm: "https://raw.githubusercontent.com/ShirkNeko/SukiSU_patch/refs/heads/main/kpm/patch_linux"
           - type: xxKSU
             ksu: true
-            susfs: false
+            exclude: susfs
             repo: "backslashxx/KernelSU"
             folder: "KernelSU"
             branch: "master"
@@ -90,11 +87,11 @@ jobs:
         susfs: [false, true]
         exclude:
           - build:
-              ksu: false
+              exclude: susfs
             susfs: true
           - build:
-              susfs: false
-            susfs: true
+              exclude: susfsless
+            susfs: false
 
     steps:
       - name: Download and extract GCC 14.2.0 toolchain
