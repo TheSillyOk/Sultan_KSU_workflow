@@ -349,7 +349,7 @@ jobs:
           echo "KSUN_V=$(./sh/get_ksuver.sh "KernelSU-Next" "KernelSU-Next" "next")" >> $GITHUB_ENV
           echo "RKSU_V=$(./sh/get_ksuver.sh "rsuntk" "KernelSU" "main")" >> $GITHUB_ENV
           echo "SUKI_V=$(./sh/get_ksuver.sh "SukiSU-Ultra" "SukiSU-Ultra" "main")" >> $GITHUB_ENV
-          echo "xxKSU_V=$(./sh/get_ksuver.sh "backslashxx" "KernelSU" "main")" >> $GITHUB_ENV
+          echo "xxKSU_V=$(./sh/get_ksuver.sh "backslashxx" "KernelSU" "master")" >> $GITHUB_ENV
 
       - name: Generate Release Body
         id: release_body
@@ -366,6 +366,7 @@ jobs:
           -> https://github.com/KernelSU-Next/KernelSU-Next
           -> https://github.com/rsuntk/KernelSU
           -> https://github.com/SukiSU-Ultra/SukiSU-Ultra
+          -> https://github.com/backslashxx/KernelSU/releases / https://t.me/kowsu_build
           
           Features:
           [+] KSUN [${{ env.KSUN_V }}](${{ env.KSUN_URL }}) + WKSU Manager
