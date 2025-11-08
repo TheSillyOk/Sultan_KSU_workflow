@@ -124,7 +124,6 @@ jobs:
           echo "kernel_dir=$PWD/sultan" >> $GITHUB_ENV
           git clone --depth=1 https://github.com/TheSillyOk/kernel_ls_patches ok_patches
           echo "ok_dir=$PWD/ok_patches" >> $GITHUB_ENV
-          #curl "https://gist.githubusercontent.com/MiRinChan/87371b65f283bb031d80e55b16b6d7ad/raw/6b82ef649188c1f0f593b0cd8a5146c5e4fd0114/fix_list_count_nodes_indent.patch" > fix_list_count_nodes_indent.patch
 
           ${{ matrix.susfs || false }} && ksu_repo="${{ matrix.build.susfs_repo || matrix.build.repo }}" || ksu_repo="${{ matrix.build.repo }}" || true
           echo "ksu_repo=$ksu_repo" >> $GITHUB_ENV
