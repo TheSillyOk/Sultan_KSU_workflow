@@ -318,7 +318,7 @@ jobs:
           echo "KSU_V=$(./sh/get_ksuver.sh "tiann" "KernelSU" "main")" >> $GITHUB_ENV
           echo "KSUN_V=$(./sh/get_ksuver.sh "KernelSU-Next" "KernelSU-Next" "next")" >> $GITHUB_ENV
           echo "RKSU_V=$(./sh/get_ksuver.sh "rsuntk" "KernelSU" "main")" >> $GITHUB_ENV
-          echo "SUKI_V=$(./sh/extract_ksuver.sh "https://github.com/SukiSU-Ultra/SukiSU-Ultra" "kernel/Makefile" "." "main")" >> $GITHUB_ENV
+          echo "SUKI_V=$(./sh/get_ksuver.sh "SukiSU-Ultra" "SukiSU-Ultra" "main")" >> $GITHUB_ENV
           echo "xxKSU_V=$(./sh/get_ksuver.sh "backslashxx" "KernelSU" "main")" >> $GITHUB_ENV
 
       - name: Generate Release Body
