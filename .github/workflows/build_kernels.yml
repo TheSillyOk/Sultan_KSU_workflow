@@ -57,7 +57,7 @@ jobs:
             folder: "KernelSU"
             branch: "main"
             susfs_branch: "susfs-main"
-            kernel_patches: "../james_patches/sultan/syscall_hooks.patch"
+            kernel_patches: "../james_patches/sultan/syscall_hooks.patch sultan/reboot-hook.patch"
             extra_configs: "CONFIG_KSU_MANUAL_HOOK=y"
 #            susfs_patch: "sultan/RKSU/RKSU-SUSFS-1.5.12.patch"
             ak3_suffix: "_RKSU"
