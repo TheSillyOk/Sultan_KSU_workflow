@@ -30,15 +30,15 @@ jobs:
 #            ksu: false
 #            exclude: susfs
 #            ak3_suffix: ""
-          - type: KSU
-            ksu: true
-            repo: "tiann/KernelSU"
-            folder: "KernelSU"
-            branch: "main"
-            kernel_patches: "../james_patches/next/next_hooks.patch"
-            extra_configs: "CONFIG_KPROBES=n"
-            susfs_patch: "../susfs/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch"
-            ak3_suffix: "_KSU"
+#          - type: KSU
+#            ksu: true
+#            repo: "tiann/KernelSU"
+#            folder: "KernelSU"
+#            branch: "main"
+#            kernel_patches: "../james_patches/next/next_hooks.patch"
+#            extra_configs: "CONFIG_KPROBES=n"
+#            susfs_patch: "../susfs/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch"
+#            ak3_suffix: "_KSU"
           - type: KSUN
             ksu: true
             repo: "KernelSU-Next/KernelSU-Next"
@@ -336,7 +336,6 @@ jobs:
           -> https://github.com/SukiSU-Ultra/SukiSU-Ultra
           
           Features:
-          [+] KSU [${{ env.KSU_V }}](${{ env.KSU_URL }})
           [+] KSUN [${{ env.KSUN_V }}](${{ env.KSUN_URL }}) + WKSU Manager
           [+] RKSU [${{ env.RKSU_V }}](${{ env.RKSU_URL }})
           [+] SukiSU [${{ env.SUKI_V }}](${{ env.SUKI_URL }})
