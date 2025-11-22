@@ -17,14 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        kernel:
-          - codename: gs201
-            repo: "android_kernel_google_gs201"
-            android_version: "android14"
-            kernel_version: "6.1"
-            defconfig: gs201_defconfig
-            local_version: "-android14-11-g66e758f7d0c0-ab13748739"
-            build_date: "Tue Jul  8 09:17:32 UTC 2025"
+        susfs: [false, true]
         build:
 #          - type: Normal
 #            ksu: false
@@ -80,8 +73,14 @@ jobs:
             branch: "master"
             kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             ak3_suffix: "_xxKSU"
-
-        susfs: [false, true]
+        kernel:
+          - codename: gs201
+            repo: "android_kernel_google_gs201"
+            android_version: "android14"
+            kernel_version: "6.1"
+            defconfig: gs201_defconfig
+            local_version: "-android14-11-g66e758f7d0c0-ab13748739"
+            build_date: "Tue Jul  8 09:17:32 UTC 2025"
         exclude:
           - build:
               exclude: susfs
