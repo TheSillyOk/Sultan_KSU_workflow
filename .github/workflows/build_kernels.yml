@@ -61,6 +61,7 @@ jobs:
             folder: "KernelSU"
             branch: "nongki"
             susfs_branch: "susfs-main"
+            exclude: susfsless
             susfsless_kernel_patches: "../james_patches/sultan/syscall_hooks.patch sultan/reboot-hook.patch"
             extra_configs: "CONFIG_KSU_MANUAL_HOOK=y CONFIG_KSU_MANUAL_SU=n CONFIG_COMPAT=y CONFIG_ZRAM_GS_WRITEBACK=y"
             ak3_suffix: "_SukiSU"
