@@ -49,9 +49,7 @@ jobs:
             repo: "rsuntk/KernelSU"
             folder: "KernelSU"
             branch: "main"
-            susfs_branch: "susfs-main"
-            exclude: susfs
-            kernel_patches: ""
+            susfs_branch: "susfs-rksu-master"
             susfsless_kernel_patches: "../james_patches/sultan/syscall_hooks.patch sultan/reboot-hook.patch"
             extra_configs: "CONFIG_KSU_MANUAL_HOOK=y"
             ak3_suffix: "_RKSU"
@@ -61,7 +59,6 @@ jobs:
             folder: "KernelSU"
             branch: "nongki"
             susfs_branch: "susfs-main"
-            exclude: susfsless
             susfsless_kernel_patches: "../james_patches/sultan/syscall_hooks.patch sultan/reboot-hook.patch"
             extra_configs: "CONFIG_KSU_MANUAL_HOOK=y CONFIG_KSU_MANUAL_SU=n CONFIG_COMPAT=y CONFIG_ZRAM_GS_WRITEBACK=y"
             ak3_suffix: "_SukiSU"
