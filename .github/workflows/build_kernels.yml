@@ -34,15 +34,15 @@ jobs:
 #            ak3_suffix: "_KSU"
           - type: KSUN
             ksu: true
+            exclude: susfs
             repo: "KernelSU-Next/KernelSU-Next"
             folder: "KernelSU-Next"
-            branch: "next"
-            exclude: susfs
-            susfs_repo: "pershoot/KernelSU-Next"
-            susfs_branch: "next-susfs"
+            branch: "legacy"
             ksu_patches: "KSUN/WildJames-Manager.patch"
-            kernel_patches: "../james_patches/sultan/syscall_hooks.patch"
+            susfsless_kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             extra_configs: "CONFIG_KSU_KPROBES_HOOK=n"
+            susfsless_configs: "CONFIG_KSU_SUSFS=n"
+            susfs_ksu_patches: "KSUN/KSUN-SUSFS-2.0.0.patch"
             ak3_suffix: "_KSUNext"
           - type: RKSU
             ksu: true
