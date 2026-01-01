@@ -34,15 +34,15 @@ jobs:
             ak3_suffix: "_KSU"
           - type: KSUN
             ksu: true
-            exclude: susfs
             repo: "KernelSU-Next/KernelSU-Next"
+            susfs_repo: "pershoot/KernelSU-Next"
             folder: "KernelSU-Next"
             branch: "legacy"
-            ksu_patches: "KSUN/WildJames-Manager.patch"
+            susfs_branch: "dev-susfs"
+            susfsless_ksu_patches: "KSUN/WildJames-Manager.patch"
             susfsless_kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             extra_configs: "CONFIG_KSU_KPROBES_HOOK=n"
             susfsless_configs: "CONFIG_KSU_SUSFS=n"
-            susfs_ksu_patches: "KSUN/KSUN-SUSFS-2.0.0.patch"
             ak3_suffix: "_KSUNext"
           - type: RKSU
             ksu: true
@@ -50,7 +50,7 @@ jobs:
             folder: "KernelSU"
             branch: "main"
             susfs_branch: "susfs-rksu-master"
-            susfsless_kernel_patches: "../james_patches/sultan/syscall_hooks.patch sultan/reboot-hook.patch"
+            susfsless_kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             extra_configs: "CONFIG_KSU_MANUAL_HOOK=y"
             ak3_suffix: "_RKSU"
           - type: SukiSU
@@ -58,7 +58,7 @@ jobs:
             repo: "SukiSU-Ultra/SukiSU-Ultra"
             folder: "KernelSU"
             branch: "builtin"
-            susfsless_kernel_patches: "../james_patches/sultan/syscall_hooks.patch sultan/reboot-hook.patch"
+            susfsless_kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             extra_configs: "CONFIG_KSU_MANUAL_SU=n CONFIG_COMPAT=y CONFIG_ZRAM_GS_WRITEBACK=y"
             susfs_configs: "CONFIG_KSU_SUSFS=y CONFIG_KSU_NONE_HOOK=y"
             susfsless_configs: "CONFIG_KSU_MANUAL_HOOK=y"
