@@ -69,7 +69,7 @@ jobs:
             exclude: susfs
             repo: "backslashxx/KernelSU"
             folder: "KernelSU"
-            branch: "staging"
+            branch: "master"
             kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             ak3_suffix: "_xxKSU"
         kernel:
