@@ -70,7 +70,7 @@ jobs:
             repo: "backslashxx/KernelSU"
             folder: "KernelSU"
             branch: "staging"
-            extra_configs: "CONFIG_KSU_TAMPER_SYSCALL_TABLE=y"
+            kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             ak3_suffix: "_xxKSU"
         kernel:
           - codename: gs201
