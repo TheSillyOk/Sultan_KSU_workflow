@@ -37,7 +37,7 @@ jobs:
             repo: "KernelSU-Next/KernelSU-Next"
             folder: "KernelSU-Next"
             branch: "legacy"
-            susfs_branch: "dev-susfs"
+            susfs_branch: "dev_susfs"
             susfsless_ksu_patches: "KSUN/WildJames-Manager.patch"
             susfsless_kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             extra_configs: "CONFIG_KSU_KPROBES_HOOK=n"
@@ -335,6 +335,7 @@ jobs:
           [+] KSU [${{ env.KSU_V }}](${{ env.KSU_URL}})
           [+] KSUN [${{ env.KSUN_V }}](${{ env.KSUN_URL }})
           [+] RKSU [${{ env.RKSU_V }}](${{ env.RKSU_URL }})
+          [+] SUKI [${{ env.SUKI_V }}](${{ env.SUKI_URL }})
           [+] xxKSU [${{ env.xxKSU_V }}](${{ env.xxKSU_URL }})
           [+] SUSFS v2.0.0
           EOF
