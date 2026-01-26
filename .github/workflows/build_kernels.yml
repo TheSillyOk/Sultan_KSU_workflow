@@ -110,8 +110,12 @@ jobs:
 
           git clone --depth=1 https://github.com/TheWildJames/AnyKernel3.git -b "$ANYKERNEL_BRANCH" AK3
           echo "ak3_dir=$PWD/AK3" >> $GITHUB_ENV
-          git clone --depth=5 https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH" susfs
-          echo "susfs_dir=$PWD/susfs" >> $GITHUB_ENV
+
+          if [[ "${{ matrix.susfs }}" ]]; then
+            git clone --depth=5 https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH" susfs
+            echo "susfs_dir=$PWD/susfs" >> $GITHUB_ENV
+          fi
+
           git clone --depth=1 https://github.com/TheWildJames/kernel_patches.git james_patches
           echo "james_dir=$PWD/james_patches" >> $GITHUB_ENV
           git clone --depth=1 https://github.com/kerneltoast/${{ matrix.kernel.repo }} sultan
@@ -206,7 +210,6 @@ jobs:
         if: matrix.susfs
         run: |
 
-          cp ${{ env.susfs_dir }}/kernel_patches/50_add_susfs_in_gki-${{ matrix.kernel.android_version }}-${{ matrix.kernel.kernel_version }}.patch ${{ env.kernel_dir }}/
           cp ${{ env.susfs_dir }}/kernel_patches/fs/* ${{ env.kernel_dir }}/fs/
           cp ${{ env.susfs_dir }}/kernel_patches/include/linux/* ${{ env.kernel_dir }}/include/linux/
 
@@ -225,8 +228,8 @@ jobs:
           fi
 
           cd "${{ env.kernel_dir }}"
-          patch -p1 < 50_add_susfs_in_gki-${{ matrix.kernel.android_version }}-${{ matrix.kernel.kernel_version }}.patch || true
-          patch -p1 --fuzz=3 < ${{ env.james_dir }}/sultan/sys.c_fix.patch
+          patch -p1 < ${{ env.susfs_dir }}/kernel_patches/50_add_susfs_in_gki-${{ matrix.kernel.android_version }}-${{ matrix.kernel.kernel_version }}.patch || true
+          patch -p1 < ${{ env.james_dir }}/sultan/sys.c_fix.patch
 
           if [[ -n "${{ matrix.build.susfs_configs }}" ]]; then
             for config in ${{ matrix.build.susfs_configs }}; do
@@ -257,53 +260,13 @@ jobs:
           make CROSS_COMPILE=$GITHUB_WORKSPACE/gcc-14.2.0-nolibc/aarch64-linux/bin/aarch64-linux- CC=$GITHUB_WORKSPACE/gcc-14.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc -j$(nproc --all) ${{ matrix.kernel.defconfig }}
           make CROSS_COMPILE="ccache $GITHUB_WORKSPACE/gcc-14.2.0-nolibc/aarch64-linux/bin/aarch64-linux-" CC="ccache $GITHUB_WORKSPACE/gcc-14.2.0-nolibc/aarch64-linux/bin/aarch64-linux-gcc" -j$(nproc --all)
 
-      - name: Setup AnyKernel3 zip and KPM
+      - name: Setup AnyKernel3 zip
         run: |
           cd "${{ env.kernel_dir }}"
 
           echo "Copying Image.lz4 and concatenating DTB files..."
           cp ./out/arch/arm64/boot/Image.lz4 ${{ env.ak3_dir }}/Image.lz4
           cat ./out/google-devices/${{ matrix.kernel.codename }}/dts/*.dtb > ${{ env.ak3_dir }}/dtb
-
-          if [[ -n "${{ matrix.build.kpm }}" ]]; then
-            cd ${{ env.ak3_dir }}
-            curl -LSs "${{ matrix.build.kpm }}" -o patch && chmod 777 patch
-            img_file=$(find . -type f -name "Image"* -maxdepth 1)
-            echo "$img_file"
-
-            # Decompress the kernel image if it's compressed
-            if [[ "$img_file" == "./Image.gz"* ]]; then
-              dd if="$img_file" bs=1 | gunzip > Image || true
-              echo "-> Convert to: Image"
-            elif [[ "$img_file" == "./Image.lz4" ]]; then
-              lz4 -d "$img_file" Image
-              echo "-> Decompress to: Image"
-            fi
-
-            ./patch && mv oImage Image
-
-            # Re-compress the kernel image to its original format
-            if [[ "$img_file" == "./Image.gz"* ]]; then
-              gzip -c Image > Image.gz
-              rm Image
-              echo "-> Compress: Image.gz"
-              # Special handling for images with appended DTB
-              if [[ "$img_file" == "./Image.gz-dtb" ]]; then
-                compressed_length=$(dd if=Image.gz-dtb bs=1 $skip | gzip -c | wc -c)
-                dd if=Image.gz-dtb bs=1 skip=$compressed_length > dtb
-                cat Image.gz dtb > Image.gz-dtb
-                rm Image.gz && rm dtb
-                echo "-- Image.gz -> Image.gz-dtb"
-              fi
-            elif [[ "$img_file" == "./Image.lz4" ]]; then
-              lz4 -f Image Image.lz4
-              rm Image
-              echo "-> Compress: Image.lz4"
-            fi
-
-            rm patch
-            cd -
-          fi
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
