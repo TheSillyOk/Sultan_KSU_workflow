@@ -220,11 +220,16 @@ jobs:
             done
           fi
 
+          cd "${{ env.kernel_dir }}/${{ matrix.build.folder }}"
+          sed -i 's/mnts_for_all_procs/mnts_for_non_su_procs/' kernel/supercalls.c
+          sed -i 's/MNTS_FOR_ALL_PROCS/MNTS_FOR_NON_SU_PROCS/' kernel/supercalls.c
+          cd -
+
           if [[ -n "${{ matrix.build.susfs_kernel_patches }}" ]]; then
+            cd "${{ env.kernel_dir }}"
             for patch_name in ${{ matrix.build.susfs_kernel_patches }}; do
               patch -p1 -F 3 < "${{ env.ok_dir }}/${patch_name}"
             done
-            cd "${{ env.kernel_dir }}"
           fi
 
           cd "${{ env.kernel_dir }}"
