@@ -35,7 +35,6 @@ jobs:
           - type: KSUN
             ksu: true
             repo: "KernelSU-Next/KernelSU-Next"
-            susfs_repo: "pershoot/KernelSU-Next"
             folder: "KernelSU-Next"
             branch: "legacy"
             susfs_branch: "dev-susfs"
@@ -74,12 +73,12 @@ jobs:
             ak3_suffix: "_xxKSU"
         kernel:
           - codename: gs201
-            repo: "android_kernel_google_gs201"
+            repo: "android_kernel_google_tensynos"
             android_version: "android14"
             kernel_version: "6.1"
             defconfig: gs201_defconfig
-            local_version: "-android14-11-g66e758f7d0c0-ab13748739"
-            build_date: "Tue Jul  8 09:17:32 UTC 2025"
+            local_version: "-android14-11-gc1de4747ac59-ab14219743"
+            build_date: "#1 SMP PREEMPT Mon Oct  6 16:50:48 UTC 2025"
         exclude:
           - build:
               exclude: susfs
