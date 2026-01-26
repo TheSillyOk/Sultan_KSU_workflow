@@ -230,6 +230,7 @@ jobs:
           cd "${{ env.kernel_dir }}"
           patch -p1 < ${{ env.susfs_dir }}/kernel_patches/50_add_susfs_in_gki-${{ matrix.kernel.android_version }}-${{ matrix.kernel.kernel_version }}.patch || true
           patch -p1 < ${{ env.james_dir }}/sultan/sys.c_fix.patch
+          patch -p1 < ${{ env.james_dir }}/wild/susfs_fix_patches/v2.0.0/a14-6.1/base.c.patch
 
           if [[ -n "${{ matrix.build.susfs_configs }}" ]]; then
             for config in ${{ matrix.build.susfs_configs }}; do
