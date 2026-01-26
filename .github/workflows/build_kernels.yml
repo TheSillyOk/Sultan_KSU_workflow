@@ -78,7 +78,7 @@ jobs:
             kernel_version: "6.1"
             defconfig: gs201_defconfig
             local_version: "-android14-11-gc1de4747ac59-ab14219743"
-            build_date: "#1 SMP PREEMPT Mon Oct  6 16:50:48 UTC 2025"
+            build_date: "Mon Oct  6 16:50:48 UTC 2025"
         exclude:
           - build:
               exclude: susfs
@@ -319,6 +319,7 @@ jobs:
           cat << EOF > release_body.md
           ⚠️ **COMPATIBILITY NOTICE** ⚠️
           Please ensure compatibility by comparing release dates with official Sultan kernel releases
+          -> Jan 25, 2026 Update (A16 stable)
           
           Module:
           -> https://github.com/sidex15/ksu_module_susfs
@@ -331,11 +332,11 @@ jobs:
           -> https://github.com/backslashxx/KernelSU/releases / https://t.me/kowsu_build
           
           Features:
-          [+] KSUN [${{ env.KSUN_V }}](${{ env.KSUN_URL }}) + WKSU Manager
+          [+] KSU [${{ env.KSU_V }}](${{ env.KSU_URL}})
+          [+] KSUN [${{ env.KSUN_V }}](${{ env.KSUN_URL }})
           [+] RKSU [${{ env.RKSU_V }}](${{ env.RKSU_URL }})
-          [+] SukiSU [${{ env.SUKI_V }}](${{ env.SUKI_URL }})
           [+] xxKSU [${{ env.xxKSU_V }}](${{ env.xxKSU_URL }})
-          [+] SUSFS v1.5.12
+          [+] SUSFS v2.0.0
           EOF
 
       - name: Set release tag
