@@ -38,7 +38,7 @@ jobs:
             folder: "KernelSU-Next"
             branch: "legacy"
             susfs_branch: "dev_susfs"
-            susfsless_ksu_patches: "KSUN/WildJames-Manager.patch"
+            susfsless_ksu_patches: "KSUN/WildJames-Manager.patch try.patch"
             susfsless_kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             extra_configs: "CONFIG_KSU_KPROBES_HOOK=n"
             susfsless_configs: "CONFIG_KSU_SUSFS=n"
