@@ -114,7 +114,11 @@ jobs:
           echo "ak3_dir=$PWD/AK3" >> $GITHUB_ENV
 
           if [[ "${{ matrix.susfs }}" ]]; then
-            git clone --depth=5 https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH" susfs
+            if [[ "${{ matrix.build.type }}" == "KSUN" ]]; then
+              git clone --depth=5 https://gitlab.com/pershoot/susfs4ksu.git -b "${SUSFS_BRANCH}-dev" susfs
+            else
+              git clone --depth=5 https://gitlab.com/simonpunk/susfs4ksu.git -b "$SUSFS_BRANCH" susfs
+            fi
             echo "susfs_dir=$PWD/susfs" >> $GITHUB_ENV
           fi
 
