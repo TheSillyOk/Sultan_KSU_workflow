@@ -249,7 +249,7 @@ jobs:
           fi
 
       - name: Cache Kernel Build
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.ccache
           key: ${{ matrix.kernel.codename }}-${{ matrix.build.type }}-SUSFS_${{ matrix.susfs }}-ccache-${{ github.sha }}-${{ github.run_number }}
@@ -277,7 +277,7 @@ jobs:
           cat ./out/google-devices/${{ matrix.kernel.codename }}/dts/*.dtb > ${{ env.ak3_dir }}/dtb
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ env.zip_name }}
           path: ${{ env.ak3_dir }}/*
@@ -290,7 +290,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: ./downloaded-artifacts
 
