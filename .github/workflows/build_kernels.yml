@@ -35,9 +35,10 @@ jobs:
           - type: KSUN
             ksu: true
             repo: "KernelSU-Next/KernelSU-Next"
+            susfs_repo: "pershoot/KernelSU-Next"
             folder: "KernelSU-Next"
             branch: "legacy"
-            susfs_branch: "dev_susfs"
+            susfs_branch: "dev-susfs"
             susfsless_ksu_patches: "try.patch"
             susfsless_kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
             extra_configs: "CONFIG_KSU_KPROBES_HOOK=n"
@@ -45,6 +46,7 @@ jobs:
             ak3_suffix: "_KSUNext"
           - type: RKSU
             ksu: true
+            exclude: susfs
             repo: "rsuntk/KernelSU"
             folder: "KernelSU"
             branch: "main"
@@ -69,7 +71,7 @@ jobs:
             repo: "backslashxx/KernelSU"
             folder: "KernelSU"
             branch: "master"
-            kernel_patches: "sultan/scope-min-hooks-v1.6.patch"
+            kernel_patches: "sultan/scope-min-hooks-v1.9.patch"
             ak3_suffix: "_xxKSU"
         kernel:
           - codename: gs201
